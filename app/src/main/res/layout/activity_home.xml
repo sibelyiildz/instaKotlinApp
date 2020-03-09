@@ -34,6 +34,15 @@
                         android:layout_height="match_parent">
 
                         <ImageView
+                            android:id="@+id/imgLogo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toStartOf="@+id/imgTabDirectMessage"
+                            app:layout_constraintStart_toEndOf="@+id/imgTabCamera"
+                            app:srcCompat="@drawable/ic_launcher_foreground"
+                            tools:ignore="VectorDrawableCompat" />
+
+                        <ImageView
                             android:id="@+id/imgTabCamera"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -59,12 +68,23 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/golgelik"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/imgLogo"
+                            tools:ignore="MissingConstraints" />
+
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.appcompat.widget.Toolbar>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
+
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.viewpager.widget.ViewPager
@@ -74,7 +94,9 @@
             app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appbar" />
+            app:layout_constraintTop_toBottomOf="@+id/appbar">
+
+        </androidx.viewpager.widget.ViewPager>
 
         <View
             android:layout_width="match_parent"
