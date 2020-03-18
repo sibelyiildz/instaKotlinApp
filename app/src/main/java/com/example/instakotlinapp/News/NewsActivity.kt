@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.activity_home.*
 
 class NewsActivity : AppCompatActivity() {
 
-    private val ACTIVITY_NO = 3
+    private val ACTIVITY_NO = 1
     private val TAG = "NewsActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {

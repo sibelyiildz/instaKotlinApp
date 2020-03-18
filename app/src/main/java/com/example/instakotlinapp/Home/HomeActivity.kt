@@ -35,9 +35,9 @@ class HomeActivity : AppCompatActivity() {
     fun setupHomeViewPager() {
 
         var homePagerAdapter = HomePagerAdapter(supportFragmentManager)
-        homePagerAdapter.addFragment(CameraFragment())  //id=0
+        homePagerAdapter.addFragment(ShareFragment())  //id=0
         homePagerAdapter.addFragment(HomeFragment())    //id=1
-        homePagerAdapter.addFragment(MessagesFragment())    //id=2
+        homePagerAdapter.addFragment(SearchFragment())    //id=2
 
         //activityMainde bulunan viewPager'a oluşturduğumuz adapter'i atadık
         homeViewPager.adapter = homePagerAdapter

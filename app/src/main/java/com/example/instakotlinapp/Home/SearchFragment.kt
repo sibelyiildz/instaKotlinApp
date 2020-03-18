@@ -17,7 +17,7 @@ import com.example.instakotlinapp.R
 ║     07/03/2020 - 12:59     ║
 ╚════════════════════════════╝
  */
-class MessagesFragment : Fragment() {
+class SearchFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,7 +25,7 @@ class MessagesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        var view = inflater.inflate(R.layout.fragment_messages, container, false)
+        var view = inflater.inflate(R.layout.fragment_search, container, false)
         return view
     }
 }

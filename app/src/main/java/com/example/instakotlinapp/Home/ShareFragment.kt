@@ -17,7 +17,7 @@ import com.example.instakotlinapp.R
 ║     07/03/2020 - 12:59     ║
 ╚════════════════════════════╝
  */
-class CameraFragment : Fragment() {
+class ShareFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,7 +25,7 @@ class CameraFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        var view = inflater.inflate(R.layout.fragment_camera, container, false)
+        var view = inflater.inflate(R.layout.fragment_share, container, false)
         return view
     }
 }

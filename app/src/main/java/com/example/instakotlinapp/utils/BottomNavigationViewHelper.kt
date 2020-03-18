@@ -7,8 +7,6 @@ import com.example.instakotlinapp.Home.HomeActivity
 import com.example.instakotlinapp.News.NewsActivity
 import com.example.instakotlinapp.Profile.ProfileActivity
 import com.example.instakotlinapp.R
-import com.example.instakotlinapp.Search.SearchActivity
-import com.example.instakotlinapp.Share.ShareActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
 
@@ -29,10 +27,10 @@ class BottomNavigationViewHelper {
         //BottomNavigationView'da default gelen özellikleri değiştirdiğimiz kısım, kütüphene yükledik
         fun setupBottomNavigationView(bottomNavigationViewEx: BottomNavigationViewEx) {
 
-            bottomNavigationViewEx.enableAnimation(false)
-            bottomNavigationViewEx.enableItemShiftingMode(false)
-            bottomNavigationViewEx.enableShiftingMode(false)
-            bottomNavigationViewEx.setTextVisibility(false)
+            bottomNavigationViewEx.enableAnimation(true)
+            bottomNavigationViewEx.enableItemShiftingMode(true)
+            bottomNavigationViewEx.enableShiftingMode(true)
+            bottomNavigationViewEx.setTextVisibility(true)
         }
 
         //Activityler arası geçiş için
@@ -48,26 +46,6 @@ class BottomNavigationViewHelper {
                                 val intent = Intent(
                                     context,
                                     HomeActivity::class.java
-                                ).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                                context.startActivity(intent)
-                                return true
-                            }
-
-                            R.id.ic_serach -> {
-
-                                val intent = Intent(
-                                    context,
-                                    SearchActivity::class.java
-                                ).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                                context.startActivity(intent)
-                                return true
-                            }
-
-                            R.id.ic_share -> {
-
-                                val intent = Intent(
-                                    context,
-                                    ShareActivity::class.java
                                 ).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                                 context.startActivity(intent)
                                 return true

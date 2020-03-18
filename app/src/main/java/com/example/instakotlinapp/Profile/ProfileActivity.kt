@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.activity_profile.*
 
 class ProfileActivity : AppCompatActivity() {
 
-    private val ACTIVITY_NO = 4
+    private val ACTIVITY_NO = 2
     private val TAG = "ProfileActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {

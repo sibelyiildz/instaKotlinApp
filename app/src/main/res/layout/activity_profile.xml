@@ -6,53 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".Profile.ProfileActivity">
 
-    <TextView
-        android:id="@+id/tvProfilAdiToolbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginLeft="18dp"
-        android:text="sibelyiildz"
-        android:textColor="@color/siyah"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imgProfileSettings"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imgProfileSettings" />
 
-    <ImageView
-        android:id="@+id/imgProfileSettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_profile_options"
-        tools:ignore="VectorDrawableCompat" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/imgProfileSettings"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_discover_people"
-        tools:ignore="VectorDrawableCompat" />
-
-    <View
-        android:id="@+id/golgelik"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/golgelik"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topConstraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@color/toolbar_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        tools:ignore="MissingConstraints"></View>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="InvalidId">
+
+        <TextView
+            android:id="@+id/tvProfilAdiToolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginLeft="18dp"
+            android:text="sibelyiildz"
+            android:textColor="@color/beyaz"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgProfileSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_profile_options"
+            tools:ignore="VectorDrawableCompat" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleProfileImage"
@@ -65,7 +56,7 @@
         app:civ_border_color="@color/golgelik"
         app:civ_border_width="1dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/golgelik"
+        app:layout_constraintTop_toBottomOf="@+id/topConstraintLayout"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -73,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Takipçi"
+        android:text="100"
         android:textColor="@color/siyah"
         android:textSize="16sp"
         android:textStyle="bold"
