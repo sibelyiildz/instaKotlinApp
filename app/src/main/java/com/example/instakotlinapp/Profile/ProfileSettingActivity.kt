@@ -1,30 +1,28 @@
 package com.example.instakotlinapp.Profile
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.instakotlinapp.R
 import com.example.instakotlinapp.utils.BottomNavigationViewHelper
-import kotlinx.android.synthetic.main.activity_profile.*
+import kotlinx.android.synthetic.main.activity_profile_setting.*
 
-class ProfileActivity : AppCompatActivity() {
+
+class ProfileSettingActivity : AppCompatActivity() {
 
     private val ACTIVITY_NO = 2
     private val TAG = "ProfileActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
+        setContentView(R.layout.activity_profile_setting)
 
-        setupToolBar()
         setupNavigationView()
+        setupToolBar()
     }
 
     private fun setupToolBar() {
-
-        imgProfileSettings.setOnClickListener {
-            var intent = Intent(this, ProfileSettingActivity::class.java)
-            startActivity(intent)
+        imgGeri.setOnClickListener {
+            onBackPressed()
         }
     }
 

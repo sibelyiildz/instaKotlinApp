@@ -34,14 +34,6 @@
                         android:layout_height="match_parent"
                         android:background="@color/toolbar_color">
 
-                        <ImageView
-                            android:id="@+id/imgLogo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintEnd_toStartOf="@+id/imgTabSearch"
-                            app:layout_constraintStart_toEndOf="@+id/imgTabShare"
-                            app:srcCompat="@drawable/ic_launcher_foreground"
-                            tools:ignore="VectorDrawableCompat" />
 
                         <ImageView
                             android:id="@+id/imgTabShare"
