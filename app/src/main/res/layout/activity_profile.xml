@@ -170,7 +170,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="4dp"
-        android:text="kütahya Dumlupınar Üniversitesi"
+        android:text="Kütahya Dumlupınar Üniversitesi"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvProfilGercekAdi" />
 

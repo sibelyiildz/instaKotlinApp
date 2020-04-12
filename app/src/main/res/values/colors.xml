@@ -3,9 +3,10 @@
     <color name="colorPrimary">#fafafa</color>
     <color name="toolbar_color">#13283E</color>
     <color name="colorPrimaryDark">#f0f0f0</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">#4F8EE6</color>
     <color name="golgelik">#dbdbdb</color>
     <color name="siyah">#000</color>
     <color name="beyaz">#FFF</color>
+    <color name="mavi">#4F8EE6</color>
 
 </resources>
