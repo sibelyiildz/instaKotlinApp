@@ -1,6 +1,7 @@
 package com.example.instakotlinapp.Profile
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.instakotlinapp.R
 import com.example.instakotlinapp.utils.BottomNavigationViewHelper
@@ -18,9 +19,41 @@ class ProfileSettingActivity : AppCompatActivity() {
 
         setupNavigationView()
         setupToolBar()
+        settingsFragmentGecisleri()
+    }
+
+    /*Profil ayarlarından herhangi bir ayar tıklandığında onun fragmenti açılacak.
+    * ProfilSettingActivity'de ikitane layout kullancık. Herhangi bir fargment açıldığında
+    * ayarların açık olduğu layout görünürlüğü kaybolup fragmentin göreneceği layout açılacak.*/
+    private fun settingsFragmentGecisleri() {
+
+        tvProfilDüzenleHesapAyarlari.setOnClickListener {
+            profileSettingsRoot.visibility =
+                View.GONE //Ayarlar kısmının layoutun görünürlüğünü kapattık
+            var transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.profileSettingsContainer, ProfilDuzenleFragment())
+            transaction.addToBackStack("ProfilDüzenleFragment Eklendi")  //Geriye basıldığında bir öncesi fragmente dönmesi
+            transaction.commit()
+        }
+
+        tvCikisYap.setOnClickListener {
+            profileSettingsRoot.visibility =
+                View.GONE //Ayarlar kısmının layoutun görünürlüğünü kapattık
+            var transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.profileSettingsContainer, CikisYapFragment())
+            transaction.addToBackStack("cikisYapFragment Eklendi")
+            transaction.commit()
+        }
+    }
+
+    //Geri tuşuna basıldığında Ayarlar kısmının layoutun görünürlüğü tekrar açılsın(yukarda kapatmıştık :) )
+    override fun onBackPressed() {
+        profileSettingsRoot.visibility = View.VISIBLE
+        super.onBackPressed()
     }
 
     private fun setupToolBar() {
+        //Geri tuşu iconu basıldığında eski activitye dönmesi için
         imgGeri.setOnClickListener {
             onBackPressed()
         }
