@@ -23,7 +23,7 @@ class ProfileSettingActivity : AppCompatActivity() {
     }
 
     /*Profil ayarlarından herhangi bir ayar tıklandığında onun fragmenti açılacak.
-    * ProfilSettingActivity'de ikitane layout kullancık. Herhangi bir fargment açıldığında
+    * ProfilSettingActivity'de ikitane layout kullandık. Herhangi bir fragment açıldığında
     * ayarların açık olduğu layout görünürlüğü kaybolup fragmentin göreneceği layout açılacak.*/
     private fun settingsFragmentGecisleri() {
 

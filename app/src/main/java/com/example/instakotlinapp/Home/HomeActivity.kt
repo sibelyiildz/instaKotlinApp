@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.instakotlinapp.R
 import com.example.instakotlinapp.utils.BottomNavigationViewHelper
 import com.example.instakotlinapp.utils.HomePagerAdapter
+import com.example.instakotlinapp.utils.UniversalImageLoader
+import com.nostra13.universalimageloader.core.ImageLoader
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
@@ -16,6 +18,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        initImageLoader()
         setupNavigationView()
         setupHomeViewPager()
 
@@ -45,5 +48,11 @@ class HomeActivity : AppCompatActivity() {
         //fragmentler listeye eklediğimiz sırayla açılır ilk home fragmentinin açılmasını istiyoruz.
         homeViewPager.currentItem = 1   //viewPager'da ilk home fragmenti açılır
 
+    }
+
+    // Uygulamada sadece 1 defa yazıp çağırmak yeterli.
+    private fun initImageLoader() {
+        var universalImageLoader = UniversalImageLoader(this)
+        ImageLoader.getInstance().init(universalImageLoader.config)
     }
 }
