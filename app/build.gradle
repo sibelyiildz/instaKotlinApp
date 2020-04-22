@@ -46,4 +46,7 @@ dependencies {
 
     //Universal image loader
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+
+    //greenrobot eventbus  (acticity ve fragmnet vs arası etkileşim, veri alışverişi)
+    implementation 'org.greenrobot:eventbus:3.2.0'
 }
