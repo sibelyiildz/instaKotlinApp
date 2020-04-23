@@ -22,11 +22,8 @@ class ProfilDuzenleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(
-            R.layout.fragment_profil_duzenle,
-            container,
-            false
-        )  //Fragmentin içindekilere öğelere erişmek istiyorsak bu inflate işlemini bir değişkene atamamız gerek.
+        val view = inflater.inflate(R.layout.fragment_profil_duzenle, container, false)
+        //Fragmentin içindekilere öğelere erişmek istiyorsak bu inflate işlemini bir değişkene atamamız gerek.
 
         cicleProfileImageFragment =
             view.findViewById(R.id.circleProfileImage)  //fragmentte olduğumuz için.Acticitylerde buna gerek yok
