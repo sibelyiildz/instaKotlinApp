@@ -8,5 +8,6 @@
     <color name="siyah">#000</color>
     <color name="beyaz">#FFF</color>
     <color name="mavi">#4F8EE6</color>
+    <color name="button_pasif">#9EB5D5</color>
 
 </resources>
