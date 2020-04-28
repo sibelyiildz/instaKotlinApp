@@ -1,5 +1,6 @@
 package com.example.instakotlinapp.Login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -31,6 +32,11 @@ class RegisterActivity : AppCompatActivity(), FragmentManager.OnBackStackChanged
     }
 
     private fun init() {
+
+        tvGirisYap.setOnClickListener {
+            var intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+            startActivity(intent)
+        }
 
         btnIleri.setOnClickListener {
 

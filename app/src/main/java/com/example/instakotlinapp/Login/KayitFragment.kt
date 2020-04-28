@@ -1,6 +1,7 @@
 package com.example.instakotlinapp.Login
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -47,6 +48,15 @@ class KayitFragment : Fragment() {
         /* if(mAuth.currentUser != null){   //oturum açmış vir kullanıcının sistemden çıkarılması.
              mAuth.signOut()
          }*/
+
+        view.tvGirisYap.setOnClickListener {
+
+            var intent = Intent(activity, LoginActivity::class.java)
+            startActivity(intent)
+
+        }
+
+
 
         mRef = FirebaseDatabase.getInstance().reference
 
