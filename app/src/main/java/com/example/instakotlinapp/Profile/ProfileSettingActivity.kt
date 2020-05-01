@@ -37,12 +37,9 @@ class ProfileSettingActivity : AppCompatActivity() {
         }
 
         tvCikisYap.setOnClickListener {
-            profileSettingsRoot.visibility =
-                View.GONE //Ayarlar kısmının layoutun görünürlüğünü kapattık
-            var transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.profileSettingsContainer, CikisYapFragment())
-            transaction.addToBackStack("cikisYapFragment Eklendi")
-            transaction.commit()
+
+            var dialog = CikisYapFragment()
+            dialog.show(supportFragmentManager, "cisikYapDialogGoster")
         }
     }
 

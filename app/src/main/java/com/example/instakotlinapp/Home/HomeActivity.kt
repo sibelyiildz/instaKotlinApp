@@ -1,11 +1,14 @@
 package com.example.instakotlinapp.Home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.instakotlinapp.Login.LoginActivity
 import com.example.instakotlinapp.R
 import com.example.instakotlinapp.utils.BottomNavigationViewHelper
 import com.example.instakotlinapp.utils.HomePagerAdapter
 import com.example.instakotlinapp.utils.UniversalImageLoader
+import com.google.firebase.auth.FirebaseAuth
 import com.nostra13.universalimageloader.core.ImageLoader
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -14,9 +17,16 @@ class HomeActivity : AppCompatActivity() {
     private val ACTIVITY_NO = 0
     private val TAG = "HomeActivity"
 
+    lateinit var mAuth: FirebaseAuth       //Oturum açma için referans nesnesi
+    lateinit var mAuthListener: FirebaseAuth.AuthStateListener   //oturum açma işlemlerini dinleyen bir yapı
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+
+        setupAuthListener()    //Kullanıcının oturum açıp açmadığı ile ilgili veriler
+        mAuth = FirebaseAuth.getInstance()    //ilk atamalarını burda yapıyoruz
 
         initImageLoader()
         setupNavigationView()
@@ -54,5 +64,38 @@ class HomeActivity : AppCompatActivity() {
     private fun initImageLoader() {
         var universalImageLoader = UniversalImageLoader(this)
         ImageLoader.getInstance().init(universalImageLoader.config)
+    }
+
+    //Kullanıcının oturum açıp açmadığı ile ilgili verileri tutan listener   Eğer daha önce oturum açmadıysa login activity'e gidecek
+    private fun setupAuthListener() {
+        mAuthListener = object : FirebaseAuth.AuthStateListener {
+            override fun onAuthStateChanged(p0: FirebaseAuth) {
+
+                var user = FirebaseAuth.getInstance().currentUser
+
+                if (user == null) {
+
+                    var intent = Intent(this@HomeActivity, LoginActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    startActivity(intent)
+                    finish()
+                } else {
+
+                }
+            }
+
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mAuth.addAuthStateListener(mAuthListener)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener)
+        }
     }
 }

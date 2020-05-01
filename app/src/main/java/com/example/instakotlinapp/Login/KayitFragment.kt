@@ -69,6 +69,7 @@ class KayitFragment : Fragment() {
 
         view.btnGiris.setOnClickListener {
 
+            mRef.child("test").setValue(5)
             var kullaniciAdiKullanımdaMi = false
             mRef.child("users").addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {
@@ -77,6 +78,7 @@ class KayitFragment : Fragment() {
 
                 override fun onDataChange(p0: DataSnapshot) {
                     if (p0.value != null) {
+
                         for (user in p0.children) {
                             var okunanKullanici = user.getValue(Users::class.java)
                             if (okunanKullanici!!.user_name!!.equals(view.etKullaniciAdi.text.toString())) {
@@ -86,6 +88,7 @@ class KayitFragment : Fragment() {
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 kullaniciAdiKullanımdaMi = true
+
                                 break
                             }
                         }
@@ -147,6 +150,7 @@ class KayitFragment : Fragment() {
                                                 })
 
                                         } else {
+
                                             Toast.makeText(
                                                 activity,
                                                 "Oturum açılamadı : " + p0.exception,
@@ -159,6 +163,17 @@ class KayitFragment : Fragment() {
 
 
                         }
+                    } else {
+
+                        var sifre = view.etSifre.text.toString()
+                        var adSoyad = view.etAdSoyad.text.toString()
+                        var userName = view.etKullaniciAdi.text.toString()
+
+
+                        var kaydedilecekKullanici =
+                            Users(gelenEmail, sifre, userName, adSoyad, "cxvxcvxcvxcvxcvxc")
+                        mRef.child("users").child("cxvxcvxcvxcvxcvxc")
+                            .setValue(kaydedilecekKullanici)
                     }
                 }
 

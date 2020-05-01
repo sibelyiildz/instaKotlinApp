@@ -6,9 +6,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
+import com.example.instakotlinapp.Home.HomeActivity
 import com.example.instakotlinapp.Model.Users
 import com.example.instakotlinapp.R
 import com.example.instakotlinapp.utils.EventbusDataEvents
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_register.*
 import org.greenrobot.eventbus.EventBus
@@ -17,13 +19,18 @@ class RegisterActivity : AppCompatActivity(), FragmentManager.OnBackStackChanged
 
     lateinit var manager: FragmentManager
     lateinit var mRef: DatabaseReference  //verileri databaseden okumak için bir referans oluşturmamız gerekiyor.
+    lateinit var mAuth: FirebaseAuth       //Oturum açma için referans nesnesi
+    lateinit var mAuthListener: FirebaseAuth.AuthStateListener   //oturum açma işlemlerini dinleyen bir yapı
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+        setupAuthListener()
+        mAuth = FirebaseAuth.getInstance()
         mRef =
             FirebaseDatabase.getInstance().reference  //yukarıda oluşturduğum referansı tanımdadım
+
 
         manager = supportFragmentManager
         manager.addOnBackStackChangedListener(this)
@@ -36,11 +43,24 @@ class RegisterActivity : AppCompatActivity(), FragmentManager.OnBackStackChanged
         tvGirisYap.setOnClickListener {
             var intent = Intent(this@RegisterActivity, LoginActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         btnIleri.setOnClickListener {
 
             if (gecerliEmail(etEpostaGiris.text.toString())) {
+
+/*
+
+                registerRoot.visibility = View.GONE
+                var transaction = supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.registerContainer, KayitFragment())
+                transaction.addToBackStack("EmailGirisFramentEklendi")
+                transaction.commit()
+
+                //Eventbus ile bilgileri gönderme
+                EventBus.getDefault().postSticky(EventbusDataEvents.EmailGönder(etEpostaGiris.text.toString()))
+*/
 
                 var emailKullanimdaMi = false
 
@@ -68,6 +88,7 @@ class RegisterActivity : AppCompatActivity(), FragmentManager.OnBackStackChanged
                             if (emailKullanimdaMi == false) {
 
                                 registerRoot.visibility = View.GONE
+                                registerContainer.visibility = View.VISIBLE
                                 var transaction = supportFragmentManager.beginTransaction()
                                 transaction.replace(R.id.registerContainer, KayitFragment())
                                 transaction.addToBackStack("EmailGirisFramentEklendi")
@@ -77,10 +98,22 @@ class RegisterActivity : AppCompatActivity(), FragmentManager.OnBackStackChanged
                                 EventBus.getDefault()
                                     .postSticky(EventbusDataEvents.EmailGönder(etEpostaGiris.text.toString()))
                             }
+                        } else {
+
+                            //Eğer veri tabanında hiç veri yoksa bile açılsın.
+                            registerRoot.visibility = View.GONE
+                            registerContainer.visibility = View.VISIBLE
+                            var transaction = supportFragmentManager.beginTransaction()
+                            transaction.replace(R.id.registerContainer, KayitFragment())
+                            transaction.addToBackStack("EmailGirisFramentEklendi")
+                            transaction.commit()
+
+                            //Eventbus ile bilgileri gönderme
+                            EventBus.getDefault()
+                                .postSticky(EventbusDataEvents.EmailGönder(etEpostaGiris.text.toString()))
                         }
                     }
                 })
-
             } else {
                 Toast.makeText(this, "Lütfen geçerli bir email adresi giriniz.", Toast.LENGTH_SHORT)
                     .show()
@@ -109,12 +142,43 @@ class RegisterActivity : AppCompatActivity(), FragmentManager.OnBackStackChanged
     }
 
     //girilen email adresinin geçerliliğinin kontrolü
-    fun gecerliEmail(kontrolEdilecekMail: String): Boolean {
-
-        if (kontrolEdilecekMail == null) {
-            return false
-        }
+    private fun gecerliEmail(kontrolEdilecekMail: String): Boolean {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(kontrolEdilecekMail).matches()
+    }
 
+    //Kullanıcının oturum açıp açmadığı ile ilgili verileri tutan listener   Eğer daha önce oturum açtıysa tekrar homeactivity'i açılacak
+    private fun setupAuthListener() {
+        mAuthListener = object : FirebaseAuth.AuthStateListener {
+            override fun onAuthStateChanged(p0: FirebaseAuth) {
+
+                var user =
+                    FirebaseAuth.getInstance().currentUser  //oturum açmış bir kullanıcı var mı
+
+                if (user != null) {
+
+                    var intent = Intent(this@RegisterActivity, HomeActivity::class.java)
+                    //Çıkış yapıldıktan sonra geri tuşuna basıldığında eski activitylere dönmeye çalışmasın diye
+                    //Sanki ilk defa programı burdan başlatmışız gibi, backstacktaki verileri siliyor
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    startActivity(intent)
+                    finish()
+                } else {
+
+                }
+            }
+
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mAuth.addAuthStateListener(mAuthListener)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener)
+        }
     }
 }
