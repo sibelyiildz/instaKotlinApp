@@ -1,16 +1,20 @@
 package com.example.instakotlinapp.Profile
 
+
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.instakotlinapp.Model.Users
 import com.example.instakotlinapp.R
 import com.example.instakotlinapp.utils.EventbusDataEvents
 import com.example.instakotlinapp.utils.UniversalImageLoader
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.fragment_profil_duzenle.*
 import kotlinx.android.synthetic.main.fragment_profil_duzenle.view.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -22,6 +26,7 @@ class ProfilDuzenleFragment : Fragment() {
 
     lateinit var cicleProfileImageFragment: CircleImageView
     lateinit var gelenKullaniciBilgileri: Users
+    val RESIM_SEC = 100  //herhangi bir sayı
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +44,31 @@ class ProfilDuzenleFragment : Fragment() {
             activity?.onBackPressed()  //Çarpı ikonuna basıldığında telefonun geri tuşuna basıyormuş gibi geri gelmesi için.
         }
 
+        //kullanıcının galeriyi açıp resim seçmesi
+        view.tvFotografiDegistir.setOnClickListener {
+
+            // resim seçme gibi işlemleri intentler ile yapıyoruz
+            var intent = Intent()
+            intent.type = "image/*"     //ne tür resimler gösterilsin(imagenin her türü)
+            intent.action =
+                Intent.ACTION_PICK        //butona tıklanıldığında ne yapmak istiyorsun(seçmek)
+            startActivityForResult(intent, RESIM_SEC)   //geri kalan bütün işlemleri burda yapıyoruz
+        }
+
         return view
+    }
+
+    //galerinin açılıp resmin seçildiği kısım
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == RESIM_SEC && resultCode == AppCompatActivity.RESULT_OK && data!!.data != null) {  //galeri açılmıştır, kullanıcı bir resim seçmiştir
+
+            var profilResimURI =
+                data.data  //Özel bir yapı, Androidin içinden bir şeylere ulaştığınızda onun adresini temsil eden yapı
+
+            circleProfileImage.setImageURI(profilResimURI)
+        }
     }
 
     private fun setupKullaniciBilgileri(view: View?) {
