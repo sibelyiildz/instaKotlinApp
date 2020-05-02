@@ -1,5 +1,7 @@
 package com.example.instakotlinapp.utils
 
+import com.example.instakotlinapp.Model.Users
+
 
 /**     Code with ❤
 ╔════════════════════════════╗
@@ -13,4 +15,6 @@ package com.example.instakotlinapp.utils
 class EventbusDataEvents {
 
     internal class EmailGönder(var email: String)
+
+    internal class KullaniciBilgileriniGonder(var kullanici: Users?)
 }

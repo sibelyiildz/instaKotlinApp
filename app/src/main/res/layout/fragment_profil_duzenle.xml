@@ -126,7 +126,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/etProfilAdi"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -149,10 +149,10 @@
                 android:text="Kullanıcı Adı"
                 android:textSize="18dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText" />
+                app:layout_constraintTop_toBottomOf="@+id/etProfilAdi" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/etProfilKullaniciAdi"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -175,10 +175,10 @@
                 android:text="Biyografi"
                 android:textSize="18dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText2" />
+                app:layout_constraintTop_toBottomOf="@+id/etProfilKullaniciAdi" />
 
             <EditText
-                android:id="@+id/editText3"
+                android:id="@+id/etProfilBiyografi"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

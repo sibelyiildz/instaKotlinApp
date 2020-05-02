@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.instakotlinapp.Model.KullaniciDetaylari
 import com.example.instakotlinapp.Model.Users
 import com.example.instakotlinapp.R
 import com.example.instakotlinapp.utils.EventbusDataEvents
@@ -45,9 +46,6 @@ class KayitFragment : Fragment() {
 
         mAuth = FirebaseAuth.getInstance()
 
-        /* if(mAuth.currentUser != null){   //oturum açmış vir kullanıcının sistemden çıkarılması.
-             mAuth.signOut()
-         }*/
 
         view.tvGirisYap.setOnClickListener {
 
@@ -63,7 +61,7 @@ class KayitFragment : Fragment() {
 
         //Her 3 editText'e en az 6 karakter girilmeden button aktif olmamalı. Firebasete bunu istiyor
         view.etAdSoyad.addTextChangedListener(watcher)
-        view.etKullaniciAdi.addTextChangedListener(watcher)
+        view.etProfilKullaniciAdi.addTextChangedListener(watcher)
         view.etSifre.addTextChangedListener(watcher)
 
 
@@ -81,7 +79,7 @@ class KayitFragment : Fragment() {
 
                         for (user in p0.children) {
                             var okunanKullanici = user.getValue(Users::class.java)
-                            if (okunanKullanici!!.user_name!!.equals(view.etKullaniciAdi.text.toString())) {
+                            if (okunanKullanici!!.user_name!!.equals(view.etProfilKullaniciAdi.text.toString())) {
                                 Toast.makeText(
                                     activity,
                                     "Bu kullanıcı adı kullanılıyor",
@@ -97,7 +95,7 @@ class KayitFragment : Fragment() {
 
                             var sifre = view.etSifre.text.toString()
                             var adSoyad = view.etAdSoyad.text.toString()
-                            var userName = view.etKullaniciAdi.text.toString()
+                            var userName = view.etProfilKullaniciAdi.text.toString()
 
                             //Kullanıcı email ile oturum açıyor
                             mAuth.createUserWithEmailAndPassword(gelenEmail, sifre)
@@ -111,10 +109,20 @@ class KayitFragment : Fragment() {
                                                 Toast.LENGTH_SHORT
                                             ).show()
 
-                                            var userID = mAuth.currentUser!!.uid.toString()
+                                            var userID =
+                                                mAuth.currentUser!!.uid.toString()  //Oturum açıldıktan sonra authenticationdan id yi aldık
+
                                             //oturum açan kullanıcının verilerini database'ye kaydetme
-                                            var kaydedilecekKullanici =
-                                                Users(gelenEmail, sifre, userName, adSoyad, userID)
+                                            var kaydedilecekKullaniciDetaylari =
+                                                KullaniciDetaylari("0", "0", "0", "", "")
+                                            var kaydedilecekKullanici = Users(
+                                                gelenEmail,
+                                                sifre,
+                                                userName,
+                                                adSoyad,
+                                                userID,
+                                                kaydedilecekKullaniciDetaylari
+                                            )
 
                                             mRef.child("users").child(userID)
                                                 .setValue(kaydedilecekKullanici)
@@ -167,11 +175,20 @@ class KayitFragment : Fragment() {
 
                         var sifre = view.etSifre.text.toString()
                         var adSoyad = view.etAdSoyad.text.toString()
-                        var userName = view.etKullaniciAdi.text.toString()
+                        var userName = view.etProfilKullaniciAdi.text.toString()
 
 
-                        var kaydedilecekKullanici =
-                            Users(gelenEmail, sifre, userName, adSoyad, "cxvxcvxcvxcvxcvxc")
+                        var kaydedilecekKullaniciDetaylari =
+                            KullaniciDetaylari("0", "0", "0", "", "")
+                        var kaydedilecekKullanici = Users(
+                            gelenEmail,
+                            sifre,
+                            userName,
+                            adSoyad,
+                            "cxvxcvxcvxcvxcvxc",
+                            kaydedilecekKullaniciDetaylari
+                        )
+
                         mRef.child("users").child("cxvxcvxcvxcvxcvxc")
                             .setValue(kaydedilecekKullanici)
                     }
@@ -198,7 +215,7 @@ class KayitFragment : Fragment() {
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             if (s!!.length > 5) {
-                if (etAdSoyad.text.toString().length > 5 && etKullaniciAdi.text.toString().length > 5 && etSifre.text.toString().length > 5) {
+                if (etAdSoyad.text.toString().length > 5 && etProfilKullaniciAdi.text.toString().length > 5 && etSifre.text.toString().length > 5) {
                     btnGiris.isEnabled = true
                     btnGiris.setTextColor(ContextCompat.getColor(activity!!, R.color.beyaz))
                     btnGiris.setBackgroundResource(R.color.mavi)

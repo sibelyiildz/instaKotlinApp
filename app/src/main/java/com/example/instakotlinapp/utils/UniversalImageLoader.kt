@@ -60,7 +60,7 @@ class UniversalImageLoader(val mContext: Context) {
             imgUrel: String,
             imageView: ImageView,
             mProgressBar: ProgressBar?,
-            ilkKisim: String
+            ilkKisim: String?
         ) {
 
             //imgUrl: facebook.com/images/logo,jpeg
