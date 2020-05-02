@@ -7,12 +7,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.instakotlinapp.Model.Users
 import com.example.instakotlinapp.R
 import com.example.instakotlinapp.utils.EventbusDataEvents
 import com.example.instakotlinapp.utils.UniversalImageLoader
+import com.google.firebase.database.*
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_profil_duzenle.*
 import kotlinx.android.synthetic.main.fragment_profil_duzenle.view.*
@@ -27,6 +29,7 @@ class ProfilDuzenleFragment : Fragment() {
     lateinit var cicleProfileImageFragment: CircleImageView
     lateinit var gelenKullaniciBilgileri: Users
     val RESIM_SEC = 100  //herhangi bir sayı
+    lateinit var mDatabaseRef: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +39,7 @@ class ProfilDuzenleFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_profil_duzenle, container, false)
         //Fragmentin içindekilere öğelere erişmek istiyorsak bu inflate işlemini bir değişkene atamamız gerek.
 
+        mDatabaseRef = FirebaseDatabase.getInstance().reference
         setupKullaniciBilgileri(view)
 
 
@@ -55,6 +59,56 @@ class ProfilDuzenleFragment : Fragment() {
             startActivityForResult(intent, RESIM_SEC)   //geri kalan bütün işlemleri burda yapıyoruz
         }
 
+        //Değişiklik yapılan bilgileri veri tabanına kaydettiğimiz kısım
+        view.imgBtnDegisiklikleriKaydet.setOnClickListener {
+
+            if (!gelenKullaniciBilgileri.adi_soyadi!!.equals(view.etProfilAdi.text.toString())) {   //ilk değer ile keydet butonuna basıldığı anki değer aynı değilse
+                mDatabaseRef.child("users").child(gelenKullaniciBilgileri.user_id!!)
+                    .child("adi_soyadi").setValue(view.etProfilAdi.text.toString())
+            }
+            if (!gelenKullaniciBilgileri.kullanici_detaylari!!.biyografi.equals(view.etProfilBiyografi.text.toString())) {
+                mDatabaseRef.child("users").child(gelenKullaniciBilgileri.user_id!!)
+                    .child("kullanici_detaylari").child("biyografi")
+                    .setValue(view.etProfilBiyografi.text.toString())
+            }
+            if (!gelenKullaniciBilgileri.user_name!!.equals(view.etProfilKullaniciAdi.text.toString())) {
+                mDatabaseRef.child("users").orderByChild("user_name")
+                    .addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onCancelled(p0: DatabaseError) {
+                        }
+
+                        override fun onDataChange(p0: DataSnapshot) {
+
+                            var userNameKullanimdaMi = false
+                            for (ds in p0.children) {
+                                var okunanKullaniciAdi =
+                                    ds!!.getValue(Users::class.java)!!.user_name
+
+                                if (okunanKullaniciAdi!!.equals(view.etProfilKullaniciAdi.text.toString())) {
+                                    Toast.makeText(
+                                        activity,
+                                        "Kullanıcı Adı Kullanımda",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    userNameKullanimdaMi = true
+                                    break
+                                }
+                            }
+                            if (userNameKullanimdaMi == false) {
+
+                                mDatabaseRef.child("users").child(gelenKullaniciBilgileri.user_id!!)
+                                    .child("user_name")
+                                    .setValue(view.etProfilKullaniciAdi.text.toString())
+
+                            }
+                        }
+
+                    })
+            }
+
+            Toast.makeText(activity, "Kullanıcı Bilgileri Güncellendi", Toast.LENGTH_SHORT).show()
+        }
+
         return view
     }
 
@@ -71,6 +125,7 @@ class ProfilDuzenleFragment : Fragment() {
         }
     }
 
+    //kullanıcı bilgilerininin profilden alınıp bu kısma yazdırıldığı kısım
     private fun setupKullaniciBilgileri(view: View?) {
 
         view!!.etProfilAdi.setText(gelenKullaniciBilgileri.adi_soyadi)
