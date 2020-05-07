@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.instakotlinapp.Login.LoginActivity
 import com.example.instakotlinapp.R
+import com.example.instakotlinapp.Share.ShareActivity
 import com.example.instakotlinapp.utils.BottomNavigationViewHelper
 import com.example.instakotlinapp.utils.HomePagerAdapter
 import com.example.instakotlinapp.utils.UniversalImageLoader
@@ -31,6 +32,14 @@ class HomeActivity : AppCompatActivity() {
         initImageLoader()
         setupNavigationView()
         setupHomeViewPager()
+
+        imgTabShare.setOnClickListener {
+
+            var intent = Intent(this, ShareActivity::class.java)
+            startActivity(intent)
+        }
+
+
 
     }
 

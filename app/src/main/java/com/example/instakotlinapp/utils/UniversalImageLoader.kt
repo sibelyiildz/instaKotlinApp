@@ -55,7 +55,7 @@ class UniversalImageLoader(val mContext: Context) {
     companion object {
         private val defaultImage = R.drawable.ic_profile
 
-        //Sınıftan nesne üretmeden metotu kullanabilmek için Compsin obje içine yazıyoruz
+        //Sınıftan nesne üretmeden metotu kullanabilmek için Compain obje içine yazıyoruz
         fun setImage(
             imgUrel: String,
             imageView: ImageView,
