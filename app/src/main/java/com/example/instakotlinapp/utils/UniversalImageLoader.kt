@@ -43,6 +43,8 @@ class UniversalImageLoader(val mContext: Context) {
                 .cacheOnDisk(true)
                 .resetViewBeforeLoading(true) //Yüklemeden önce var olanı sıfırlasın
                 .imageScaleType(ImageScaleType.EXACTLY)
+                .considerExifParams(true) //Fotografı kendine göre otomatık yana kaydırmaz
+                .bitmapConfig(Bitmap.Config.RGB_565) //Bellekten resmi getirirken hafızadan çok yer almamsı için daha az kaliterli gelcek
                 .displayer(FadeInBitmapDisplayer(400))
                 .build()  //Bu bir builder olduğu için de bütün bunları build() ile onaylıyorum
 
