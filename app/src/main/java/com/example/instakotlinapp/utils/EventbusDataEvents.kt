@@ -17,4 +17,6 @@ class EventbusDataEvents {
     internal class EmailGönder(var email: String)
 
     internal class KullaniciBilgileriniGonder(var kullanici: Users?)
+
+    internal class PaylasilacakResmiGonder(var resimYolu: String)
 }

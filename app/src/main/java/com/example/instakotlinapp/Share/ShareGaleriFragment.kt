@@ -10,15 +10,20 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.example.instakotlinapp.R
 import com.example.instakotlinapp.utils.DosyaIslemleri
+import com.example.instakotlinapp.utils.EventbusDataEvents
 import com.example.instakotlinapp.utils.ShareActivityGridViewAdapter
 import com.example.instakotlinapp.utils.UniversalImageLoader
+import kotlinx.android.synthetic.main.activity_share.*
 import kotlinx.android.synthetic.main.fragment_share_galeri.*
 import kotlinx.android.synthetic.main.fragment_share_galeri.view.*
+import org.greenrobot.eventbus.EventBus
 
 /**
  * A simple [Fragment] subclass.
  */
 class ShareGaleriFragment : Fragment() {
+
+    var secilenResimYolu: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,6 +60,7 @@ class ShareGaleriFragment : Fragment() {
         //Oluşturduğumuz adapteri spinnere atıyoruz.
         view.spnKlasörAdlari.adapter = spinnerArrayAdapter
 
+
         view.spnKlasörAdlari.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
@@ -67,6 +73,22 @@ class ShareGaleriFragment : Fragment() {
 
         }
 
+        //İleri butonuna basıldığında
+        view.tvIleriButton.setOnClickListener {
+
+            activity!!.anaLayout.visibility = View.GONE
+            activity!!.fragmentContainerLayout.visibility = View.VISIBLE
+            var transaction = activity!!.supportFragmentManager.beginTransaction()
+
+            //EventBus ile veriyi yayınlıyoruz
+            EventBus.getDefault()
+                .postSticky(EventbusDataEvents.PaylasilacakResmiGonder(secilenResimYolu!!))
+
+            transaction.replace(R.id.fragmentContainerLayout, ShareIleriFragment())
+            transaction.addToBackStack("ShareIleriFragment Eklendi")  //Geriye basıldığında bir öncesi fragmente dönmesi için stacke ekleme
+            transaction.commit()
+
+        }
         return view
     }
 
@@ -82,14 +104,15 @@ class ShareGaleriFragment : Fragment() {
 
         gridResimler.adapter = gridAdapter
 
+        secilenResimYolu = secilenKlasördekiDosyalar.get(0)
+
         //gridViewdaki herhangi bir resme tıklandığında büyük image'ye yerleştiği kısım
         gridResimler.onItemClickListener = object : AdapterView.OnItemClickListener {
             override fun onItemClick(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+
+                secilenResimYolu = secilenKlasördekiDosyalar.get(position)
                 UniversalImageLoader.setImage(
-                    secilenKlasördekiDosyalar.get(position),
-                    imgBuyukResim,
-                    null,
-                    "file:/"
+                    secilenKlasördekiDosyalar.get(position), imgBuyukResim, null, "file:/"
                 )
             }
 

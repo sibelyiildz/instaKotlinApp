@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Share.ShareGaleriFragment">
+    tools:context=".Share.ShareIleriFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:src="@drawable/ic_close"
+                android:src="@drawable/ic_geribeyaz"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -39,63 +39,67 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:backgroundTint="@color/toolbar_color"
-                android:text="İleri"
-                android:textColor="@color/beyaz"
-                android:textSize="18sp"
+                android:text="Paylaş"
+                android:textColor="@color/mavi"
+                android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Spinner
-                android:id="@+id/spnKlasörAdlari"
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:backgroundTint="@color/beyaz"
-                android:popupBackground="@color/toolbar_color"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-                app:layout_constraintStart_toEndOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar2"
-        app:layout_constraintVertical_bias="1.0">
+        tools:ignore="MissingConstraints">
 
         <ImageView
-            android:id="@+id/imgBuyukResim"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:src="@mipmap/ic_launcher"
-            app:layout_constraintBottom_toTopOf="@+id/gridResimler"
-            android:scaleType="centerCrop"
+            android:id="@+id/imgSecilenResim"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="fitXY"
+            android:src="@android:drawable/sym_def_app_icon"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.7"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <GridView
-            android:id="@+id/gridResimler"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:horizontalSpacing="1dp"
-            android:numColumns="3"
-            android:verticalSpacing="1dp"
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@null"
+            android:ems="10"
+            android:hint="Bir açıklama yazın..."
+            android:inputType="textMultiLine"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgBuyukResim" />
+            app:layout_constraintTop_toBottomOf="@+id/imgSecilenResim" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/golgelik2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/golgelik"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/container"
+        tools:ignore="MissingConstraints" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

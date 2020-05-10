@@ -1,6 +1,7 @@
 package com.example.instakotlinapp.Share
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.instakotlinapp.R
 import com.example.instakotlinapp.utils.SharePagerAdapter
@@ -21,7 +22,7 @@ class ShareActivity : AppCompatActivity() {
         var tabAdlari = ArrayList<String>()
         tabAdlari.add("GALERİ")
         tabAdlari.add("FOTOĞRAF")
-        tabAdlari.add("VİDEO")
+
 
         //PagerAdapter sınıfından nesne oluşturuyoruz ve supportFragmentManager paremetresi veriyoruz
         var sharePagerAdapter = SharePagerAdapter(supportFragmentManager, tabAdlari)
@@ -29,12 +30,18 @@ class ShareActivity : AppCompatActivity() {
         //İlgili fragmentleri viewPager adpterine ekliyoruz
         sharePagerAdapter.addFragment(ShareGaleriFragment())
         sharePagerAdapter.addFragment(ShareKameraFragment())
-        sharePagerAdapter.addFragment(ShareVideoFragment())
+
 
         //Yukarıda adaptere koyduğumuz fragmentleri ViewPagerda gösteriyoruz
         shareViewPager.adapter = sharePagerAdapter
 
         //Tabların aktif olarak gösterilmesi
         shareTabLayout.setupWithViewPager(shareViewPager)
+    }
+
+    override fun onBackPressed() {
+        anaLayout.visibility = View.VISIBLE
+        fragmentContainerLayout.visibility = View.GONE
+        super.onBackPressed()
     }
 }
