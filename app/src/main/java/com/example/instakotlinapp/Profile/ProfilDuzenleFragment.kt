@@ -76,13 +76,11 @@ class ProfilDuzenleFragment : Fragment() {
 
                 var dialogYukleniyor = YukleniyorFragment()
                 dialogYukleniyor.show(activity!!.supportFragmentManager, "YukleniyorFragmenti")
-
                 dialogYukleniyor.isCancelable = false
 
 
-                val profilePicReference = mStoreRef.child("users").child(
-                    gelenKullaniciBilgileri.user_id!!
-                )
+                val profilePicReference =
+                    mStoreRef.child("users").child(gelenKullaniciBilgileri.user_id!!)
                     .child(profilFotoUri!!.lastPathSegment!!)
                 val uploadTask = profilePicReference.putFile(profilFotoUri!!)
 
