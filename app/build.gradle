@@ -57,7 +57,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:19.2.1'
     implementation 'com.google.firebase:firebase-storage-ktx:19.1.1'
 
-
     //Firebase ui
     implementation 'com.firebaseui:firebase-ui-auth:6.2.1'
+
+    //Runtime permission library(çalışma anında izin (kamera, dosyalara erişme))
+    implementation 'com.karumi:dexter:6.1.2'
 }
