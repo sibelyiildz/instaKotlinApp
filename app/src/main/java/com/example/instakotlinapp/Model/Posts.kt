@@ -14,7 +14,7 @@ class Posts {
 
     var user_id: String? = null
     var post_id: String? = null
-    var yüklenme_tarih: String? = null
+    var yüklenme_tarih: Long? = null
     var aciklama: String? = null
     var photo_url: String? = null
 
@@ -22,7 +22,7 @@ class Posts {
     constructor(
         user_id: String?,
         post_id: String?,
-        yüklenme_tarih: String?,
+        yüklenme_tarih: Long?,
         aciklama: String?,
         photo_url: String?
     ) {
