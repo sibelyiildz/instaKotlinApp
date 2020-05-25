@@ -62,4 +62,10 @@ dependencies {
 
     //Runtime permission library(çalışma anında izin (kamera, dosyalara erişme))
     implementation 'com.karumi:dexter:6.1.2'
+
+    //silicompressor dosya sıkıştırma programı(firebase yüklediğimiz resimlerin boyutlarını azaltmak için)
+    implementation 'com.iceteck.silicompressorr:silicompressor:2.2.3'
+
+    //Resim kamera view(Gönderi paylaştığımız kısımdaki kamera açılan yer)
+    implementation 'com.otaliastudios:cameraview:1.5.1'
 }

@@ -139,7 +139,6 @@ class ShareActivity : AppCompatActivity() {
 
         var tabAdlari = ArrayList<String>()
         tabAdlari.add("GALERİ")
-        tabAdlari.add("FOTOĞRAF")
 
 
         //PagerAdapter sınıfından nesne oluşturuyoruz ve supportFragmentManager paremetresi veriyoruz
@@ -147,7 +146,6 @@ class ShareActivity : AppCompatActivity() {
 
         //İlgili fragmentleri viewPager adpterine ekliyoruz
         sharePagerAdapter.addFragment(ShareGaleriFragment())
-        sharePagerAdapter.addFragment(ShareKameraFragment())
 
 
         //Yukarıda adaptere koyduğumuz fragmentleri ViewPagerda gösteriyoruz

@@ -48,7 +48,7 @@ class ShareIleriFragment : Fragment() {
         UniversalImageLoader.setImage(secilenResimYolu!!, view!!.imgSecilenResim, null, "file://")
 
         //resmi uri formatına çeviriyoruz, ancak bu şekilde firebase atabilirim
-        photoURI = Uri.parse("file://" + secilenResimYolu)
+        //photoURI = Uri.parse("file://" + secilenResimYolu)
 
         mAuth = FirebaseAuth.getInstance()
         mUser = mAuth.currentUser!!
@@ -56,12 +56,13 @@ class ShareIleriFragment : Fragment() {
         mStorageReference = FirebaseStorage.getInstance().reference
 
 
-        //paylaş butonuna tıklanıldığında
+        //paylaş butonuna tıklanıldığında resmin yüklendiği kısım
         view.tvIleriButton.setOnClickListener {
 
             var dialogYukleniyor = YukleniyorFragment()
             dialogYukleniyor.show(activity!!.supportFragmentManager, "YukleniyorFragmenti")
             dialogYukleniyor.isCancelable = false
+
 
             val profilePicReference = mStorageReference.child("users").child(mUser.uid)
                 .child(photoURI!!.lastPathSegment!!)
@@ -85,6 +86,16 @@ class ShareIleriFragment : Fragment() {
 
                     }
                 }
+
+                /*   //ÇAlışmadııı
+                   uploadTask.addOnProgressListener { object : OnProgressListener<UploadTask.TaskSnapshot>{
+                       override fun onProgress(p0: UploadTask.TaskSnapshot) {
+                           var progress= 100 * p0!!.bytesTransferred / p0!!.totalByteCount
+                           dialogYukleniyor.tvBilgi.text="%"+progress.toString()+ " yüklendi..."
+
+                       }
+
+                   } }*/
             }
 
 /*
