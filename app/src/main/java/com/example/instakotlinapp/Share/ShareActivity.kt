@@ -155,6 +155,7 @@ class ShareActivity : AppCompatActivity() {
         shareTabLayout.setupWithViewPager(shareViewPager)
     }
 
+    //Geri tuşuna basıldığında yapılacak işlemler için metodu override ettik istediğimiz yerde çağırıyoruz
     override fun onBackPressed() {
         anaLayout.visibility = View.VISIBLE
         fragmentContainerLayout.visibility = View.GONE

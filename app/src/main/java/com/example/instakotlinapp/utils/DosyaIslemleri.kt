@@ -69,34 +69,8 @@ class DosyaIslemleri {
             return tumDosyalar
         }
 
-        /*     fun compressResimDosya(fragment: Fragment, secilenResimYolu: String?) {
 
-                *//* ResimCompressAsyncTask(fragment).execute(secilenResimYolu)*//*
-
-        }*/
     }
 
-/*    //Sıkıştırma işleme bitmeden firebase gitmemek için
-    internal class ResimCompressAsyncTask(fragment: Fragment):AsyncTask<String, String, String>(){
 
-        var myFragment= fragment
-        override fun onPreExecute() {
-
-            var compressFragmet= YukleniyorFragment()
-            compressFragmet.show(myFragment.activity!!.supportFragmentManager, "compressdialogBasladı")
-            compressFragmet.isCancelable=false
-            super.onPreExecute()
-        }
-
-
-        override fun doInBackground(vararg p0: String?): String {
-
-            return ""
-        }
-
-        override fun onPostExecute(result: String?) {
-            super.onPostExecute(result)
-        }
-
-    }*/
 }

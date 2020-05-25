@@ -7,7 +7,6 @@ import com.example.instakotlinapp.Login.LoginActivity
 import com.example.instakotlinapp.R
 import com.example.instakotlinapp.Share.ShareActivity
 import com.example.instakotlinapp.utils.BottomNavigationViewHelper
-import com.example.instakotlinapp.utils.HomePagerAdapter
 import com.example.instakotlinapp.utils.UniversalImageLoader
 import com.google.firebase.auth.FirebaseAuth
 import com.nostra13.universalimageloader.core.ImageLoader
@@ -31,7 +30,7 @@ class HomeActivity : AppCompatActivity() {
 
         initImageLoader()
         setupNavigationView()
-        setupHomeViewPager()
+        // setupHomeViewPager()
 
         imgTabShare.setOnClickListener {
 
@@ -53,6 +52,7 @@ class HomeActivity : AppCompatActivity() {
         var menuItem = menu.getItem(ACTIVITY_NO)
         menuItem.isChecked = true
     }
+/*
 
     fun setupHomeViewPager() {
 
@@ -68,6 +68,7 @@ class HomeActivity : AppCompatActivity() {
         homeViewPager.currentItem = 1   //viewPager'da ilk home fragmenti açılır
 
     }
+*/
 
     // Uygulamada sadece 1 defa yazıp çağırmak yeterli.
     private fun initImageLoader() {

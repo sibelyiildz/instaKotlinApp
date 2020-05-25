@@ -1,6 +1,7 @@
 package com.example.instakotlinapp.Share
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.instakotlinapp.Home.HomeActivity
 import com.example.instakotlinapp.Model.Posts
 import com.example.instakotlinapp.Profile.YukleniyorFragment
 import com.example.instakotlinapp.R
@@ -48,7 +50,7 @@ class ShareIleriFragment : Fragment() {
         UniversalImageLoader.setImage(secilenResimYolu!!, view!!.imgSecilenResim, null, "file://")
 
         //resmi uri formatına çeviriyoruz, ancak bu şekilde firebase atabilirim
-        //photoURI = Uri.parse("file://" + secilenResimYolu)
+        photoURI = Uri.parse("file://" + secilenResimYolu)
 
         mAuth = FirebaseAuth.getInstance()
         mUser = mAuth.currentUser!!
@@ -121,6 +123,12 @@ class ShareIleriFragment : Fragment() {
 
         }
 
+        view.imgClose.setOnClickListener {
+
+            //bu fragmenti çağıran activitydeki metodu çağır
+            this.activity!!.onBackPressed()
+        }
+
         return view
     }
 
@@ -134,6 +142,9 @@ class ShareIleriFragment : Fragment() {
         mRef.child("posts").child(mUser.uid).child(postID.toString()).child("yüklenme_tarih")
             .setValue(ServerValue.TIMESTAMP)
 
+        //fotograf paylaşıldıktan sonra home activitye gitsin.
+        var intent = Intent(activity, HomeActivity::class.java)
+        startActivity(intent)
     }
 
 
