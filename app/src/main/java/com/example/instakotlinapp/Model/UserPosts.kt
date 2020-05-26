@@ -24,4 +24,31 @@ class UserPosts {
     var userID: String? = null
     var userName: String? = null
     var userProfilFotoURL: String? = null
+    var postYuklenmeTarih: Long? = null
+
+    constructor(
+        postID: String?,
+        postAciklama: String?,
+        postURL: String?,
+        userID: String?,
+        userName: String?,
+        userProfilFotoURL: String?,
+        postYuklenmeTarih: Long?
+    ) {
+        this.postID = postID
+        this.postAciklama = postAciklama
+        this.postURL = postURL
+        this.userID = userID
+        this.userName = userName
+        this.userProfilFotoURL = userProfilFotoURL
+        this.postYuklenmeTarih = postYuklenmeTarih
+    }
+
+    constructor()
+
+    override fun toString(): String {
+        return "UserPosts(postID=$postID, postAciklama=$postAciklama, postURL=$postURL, userID=$userID, userName=$userName, userProfilFotoURL=$userProfilFotoURL, postYuklenmeTarih=$postYuklenmeTarih)"
+    }
+
+
 }

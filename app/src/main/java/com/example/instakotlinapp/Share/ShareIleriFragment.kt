@@ -136,7 +136,7 @@ class ShareIleriFragment : Fragment() {
 
         var postID = mRef.child("posts").child(mUser.uid).push().key
         var yuklenenPost =
-            Posts(mUser.uid, postID, "", etPostAciklama.text.toString(), yuklenenFotoUrl)
+            Posts(mUser.uid, postID, 0, etPostAciklama.text.toString(), yuklenenFotoUrl)
 
         mRef.child("posts").child(mUser.uid).child(postID.toString()).setValue(yuklenenPost)
         mRef.child("posts").child(mUser.uid).child(postID.toString()).child("yüklenme_tarih")

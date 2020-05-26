@@ -1,6 +1,8 @@
 package com.example.instakotlinapp.utils
 
 import java.io.File
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 /**     Code with ❤
@@ -29,7 +31,6 @@ class DosyaIslemleri {
 
             //parametre olarak gönderdiğimiz dosya yolunda klasör olup olmadığının kontrolü
             if (klasördekiTumDosyalar != null) {
-/*
                 //Galeriden getirilen resimlerin tarih sırasına göre listelenmesi
                 if(klasördekiTumDosyalar.size>1){
                     Arrays.sort(klasördekiTumDosyalar, object: Comparator<File>{
@@ -40,7 +41,7 @@ class DosyaIslemleri {
                         }
 
                     })
-                }*/
+                }
 
                 for (i in 0..klasördekiTumDosyalar.size - 1) {
 

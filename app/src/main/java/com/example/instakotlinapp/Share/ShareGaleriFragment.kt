@@ -89,6 +89,13 @@ class ShareGaleriFragment : Fragment() {
             transaction.commit()
 
         }
+
+        view.imgClose.setOnClickListener {
+
+            //bu fragmenti çağıran activitydeki metodu çağır
+            this.activity!!.onBackPressed()
+        }
+
         return view
     }
 
